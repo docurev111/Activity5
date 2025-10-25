@@ -1,0 +1,239 @@
+.contact-page {
+  min-height: 100vh;
+  background: var(--dark);
+  padding-top: 80px;
+}
+
+.contact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Left Side - Form */
+.contact-left {
+  background: var(--dark-light);
+  padding: 3rem;
+  border-radius: 12px;
+  border: 2px solid var(--gray);
+}
+
+.contact-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ef4444;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: var(--gray-light);
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.875rem 1rem;
+  background: var(--dark);
+  border: 2px solid var(--gray);
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 1rem;
+  font-family: inherit;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 217, 255, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.submit-button {
+  padding: 1rem 3rem;
+  background: #ef4444;
+  color: var(--white);
+  border: none;
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin: 1rem auto 0;
+  display: block;
+}
+
+.submit-button:hover {
+  background: #dc2626;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Right Side - Info */
+.contact-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+}
+
+.available-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ef4444;
+  margin-bottom: 2rem;
+}
+
+.contact-info {
+  margin-bottom: 2rem;
+}
+
+.contact-email,
+.contact-phone {
+  color: var(--white);
+  font-size: 1.125rem;
+  margin: 0.5rem 0;
+}
+
+.social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.social-link {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--dark-light);
+  border: 2px solid var(--gray);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 1.25rem;
+  transition: var(--transition);
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--dark);
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.contact-message {
+  color: var(--gray-light);
+  font-size: 1.125rem;
+  margin-bottom: 3rem;
+  font-style: italic;
+}
+
+.contact-image {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 2rem;
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 300px;
+  background: linear-gradient(135deg, var(--dark-light) 0%, var(--dark) 100%);
+  border-radius: 12px;
+  border: 2px solid var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-placeholder svg {
+  width: 100%;
+  height: 100%;
+  opacity: 0.3;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .contact-right {
+    order: -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 2rem 1rem;
+  }
+
+  .contact-left {
+    padding: 2rem 1.5rem;
+  }
+
+  .contact-title,
+  .available-title {
+    font-size: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .submit-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-title,
+  .available-title {
+    font-size: 1.75rem;
+  }
+
+  .contact-left {
+    padding: 1.5rem 1rem;
+  }
+}
