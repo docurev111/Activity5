@@ -225,22 +225,3 @@ Activity5/
 │   └── package.json
 └── README.md
 ```
-
-## 🚧 Future Enhancements
-
-- Image upload functionality
-- Post search feature
-- User profiles with avatars
-- Email notifications
-- Post drafts
-- Rich text editor
-- Social sharing
-- Post analytics
-
-## 📄 License
-
-This project is created for educational purposes.
-
-## 👨‍💻 Author
-
-Created as Activity 5 for the Web Development course.
