@@ -10,8 +10,6 @@ import Register from './pages/Register';
 import PostDetail from './pages/PostDetail';
 import CreatePost from './pages/CreatePost';
 import EditPost from './pages/EditPost';
-import Contact from './pages/Contact';
-import WorkWithMe from './pages/WorkWithMe';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
@@ -26,8 +24,6 @@ function App() {
               <Route path="/blog" element={<Blog />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/work-with-me" element={<WorkWithMe />} />
               <Route path="/post/:id" element={<PostDetail />} />
               <Route
                 path="/create-post"
