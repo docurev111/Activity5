@@ -1,227 +1,122 @@
-# Activity 5: Wuthering Waves Blog Platform
+# Wuthering Waves Blog Platform
 
-A full-stack blog platform built with NestJS (backend) and React (frontend), themed around Wuthering Waves content.
+A full-stack blog platform with admin-only post creation and user commenting system.
 
-## 🎮 Features
+## 🎮 About
 
-### Backend (NestJS + TypeScript + SQLite)
-- **Authentication**: JWT-based authentication with role-based access control
-- **User Management**: Register, login, and profile management
-- **Posts**: CRUD operations with pagination, categories, and tags
-- **Comments**: Users can comment on posts
-- **Reactions**: Like/unlike posts
-- **Admin Controls**: Only admin can create, edit, and delete posts
-- **API Documentation**: Swagger UI available at `/api/docs`
+This is a blog platform where:
+- **Admin** (you) can create, edit, and delete blog posts
+- **Users** can register, login, comment, and like posts
+- Built with NestJS (backend) and React (frontend)
 
-### Frontend (React + Vite)
-- **Responsive Design**: Wuthering Waves themed UI
-- **Authentication**: Login and registration pages
-- **Home Page**: Browse posts with category filtering and pagination
-- **Post Details**: View full posts with comments and reactions
-- **Admin Dashboard**: Create and edit posts (admin only)
-- **Comment System**: Authenticated users can comment
-- **Reaction System**: Like posts
-
-## 🚀 Tech Stack
-
-### Backend
-- NestJS
-- TypeScript
-- TypeORM
-- SQLite
-- JWT Authentication
-- Bcrypt
-- Swagger
-
-### Frontend
-- React 18
-- Vite
-- React Router v6
-- Axios
-- React Icons
-- React Toastify
-- date-fns
-
-## 📋 Prerequisites
-
-- Node.js (v16 or higher)
-- npm or yarn
-
-## 🛠️ Installation & Setup
+## 🚀 Quick Start
 
 ### Backend Setup
 
-1. Navigate to the backend directory:
 ```bash
-cd Activity5/backend
-```
-
-2. Install dependencies:
-```bash
+cd backend
 npm install
+npm run seed        # Creates admin account and sample data
+npm run start:dev   # Starts server on http://localhost:3000
 ```
-
-3. The `.env` file is already configured with default values:
-   - Port: 3000
-   - Admin credentials: admin@wutheringwaves.com / admin123
-   - JWT secret (change in production!)
-
-4. Seed the database with sample data:
-```bash
-npm run seed
-```
-
-5. Start the development server:
-```bash
-npm run start:dev
-```
-
-The backend will be running at `http://localhost:3000`
-API Documentation: `http://localhost:3000/api/docs`
 
 ### Frontend Setup
 
-1. Navigate to the frontend directory:
 ```bash
-cd Activity5/frontend
-```
-
-2. Install dependencies:
-```bash
+cd frontend
 npm install
+npm run dev         # Starts app on http://localhost:5173
 ```
 
-3. Start the development server:
-```bash
-npm run dev
-```
-
-The frontend will be running at `http://localhost:5173`
-
-## 👤 Default Admin Credentials
+## 👤 Admin Login
 
 - **Email**: admin@wutheringwaves.com
 - **Password**: admin123
 
-## 📚 API Endpoints
+## 📚 Tech Stack
 
-### Authentication
-- `POST /auth/register` - Register new user
-- `POST /auth/login` - Login user
-- `GET /auth/profile` - Get current user profile
+**Backend**: NestJS, TypeScript, SQLite, JWT, Swagger  
+**Frontend**: React, Vite, React Router, Axios
 
-### Posts
-- `GET /posts` - Get all posts (with pagination)
-- `GET /posts/:id` - Get single post
-- `GET /posts/category/:category` - Get posts by category
-- `POST /posts` - Create post (admin only)
-- `PATCH /posts/:id` - Update post (admin only)
-- `DELETE /posts/:id` - Delete post (admin only)
+## ✨ Features
 
-### Comments
-- `GET /comments/post/:postId` - Get comments for a post
-- `POST /comments` - Create comment (authenticated)
-- `PATCH /comments/:id` - Update comment (owner only)
-- `DELETE /comments/:id` - Delete comment (owner only)
+### Admin Can:
+- ✅ Create blog posts
+- ✅ Edit posts
+- ✅ Delete posts
+- ✅ Add categories and tags
 
-### Reactions
-- `GET /reactions/post/:postId` - Get reactions for a post
-- `POST /reactions` - Add reaction (authenticated)
-- `DELETE /reactions/:postId` - Remove reaction (authenticated)
+### Users Can:
+- ✅ Register and login
+- ✅ View all posts
+- ✅ Comment on posts
+- ✅ Like posts
+- ✅ Filter by category
 
-### Users
-- `GET /users/profile` - Get user profile
-- `PATCH /users/profile` - Update user profile
+## 📖 API Documentation
 
-## 🎨 Features Breakdown
+Once the backend is running, visit:
+- **Swagger UI**: http://localhost:3000/api/docs
 
-### Admin Features
-- Create new blog posts
-- Edit existing posts
-- Delete posts
-- Manage post categories and tags
-- Add cover images to posts
+## 🔒 Security
 
-### User Features
-- Register and login
-- View all blog posts
-- Filter posts by category
-- Read full post content
-- Comment on posts
-- Like/unlike posts
-- View their profile
-
-### Public Features
-- Browse all published posts
-- View post details
-- Pagination for posts
-
-## 📱 Screenshots
-
-See the Activity5_Document.docx for detailed screenshots of:
-- Home page with post listings
-- Post detail page with comments
-- Admin post creation interface
-- Login/Register pages
-- API documentation (Swagger)
-
-## 🔒 Security Features
-
-- Password hashing with bcrypt
-- JWT token authentication
-- Role-based access control (ADMIN/USER)
+- JWT authentication
+- Password hashing (bcrypt)
+- Role-based access (Admin/User)
 - Protected routes
-- Input validation
-- CORS configuration
 
-## 📝 Database Schema
-
-### Users
-- id, email, password, username, role, createdAt, updatedAt
-
-### Posts
-- id, title, content, coverImage, category, tags, published, authorId, createdAt, updatedAt
-
-### Comments
-- id, content, postId, userId, createdAt, updatedAt
-
-### Reactions
-- id, type, postId, userId, createdAt
-
-## 🧪 Testing the Application
-
-1. Start both backend and frontend servers
-2. Open `http://localhost:5173` in your browser
-3. Login with admin credentials to create posts
-4. Register a new user account to test commenting and reactions
-5. Test all CRUD operations
-6. Check API documentation at `http://localhost:3000/api/docs`
-
-## 📦 Project Structure
+## 📁 Project Structure
 
 ```
 Activity5/
-├── backend/
+├── backend/          # NestJS API
 │   ├── src/
-│   │   ├── auth/          # Authentication module
-│   │   ├── users/         # Users module
-│   │   ├── posts/         # Posts module
-│   │   ├── comments/      # Comments module
-│   │   ├── reactions/     # Reactions module
-│   │   ├── common/        # Guards, decorators, filters
-│   │   ├── app.module.ts
-│   │   ├── main.ts
-│   │   └── seed.ts
-│   ├── package.json
-│   └── .env
-├── frontend/
+│   │   ├── auth/     # Authentication
+│   │   ├── posts/    # Blog posts
+│   │   ├── comments/ # Comments
+│   │   └── users/    # User management
+│   └── database.sqlite
+├── frontend/         # React UI
 │   ├── src/
-│   │   ├── components/    # Reusable components
-│   │   ├── pages/         # Page components
-│   │   ├── services/      # API services
-│   │   ├── context/       # React context
-│   │   ├── App.jsx
-│   │   └── main.jsx
-│   └── package.json
+│   │   ├── pages/    # Pages
+│   │   ├── components/ # Components
+│   │   └── services/ # API calls
 └── README.md
 ```
+
+## 🎯 Key Endpoints
+
+- `POST /auth/register` - Register user
+- `POST /auth/login` - Login
+- `GET /posts` - Get all posts
+- `POST /posts` - Create post (admin only)
+- `POST /comments` - Add comment
+- `POST /reactions` - Like post
+
+## 📝 Notes
+
+- SQLite database is created automatically
+- Admin account is created when you run `npm run seed`
+- Frontend connects to backend via proxy (configured in vite.config.js)
+
+## 🛠️ Development
+
+**Backend**: `npm run start:dev` (auto-reload on changes)  
+**Frontend**: `npm run dev` (hot module replacement)
+
+## 📦 Build for Production
+
+```bash
+# Backend
+cd backend
+npm run build
+npm run start:prod
+
+# Frontend
+cd frontend
+npm run build
+```
+
+---
+
+**Made with ❤️ for Wuthering Waves fans**
