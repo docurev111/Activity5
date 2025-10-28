@@ -21,8 +21,12 @@ const PostDetail = () => {
   useEffect(() => {
     fetchPost();
     fetchComments();
-    fetchReactions();
   }, [id]);
+
+  useEffect(() => {
+    // Refetch reactions when user changes (login/logout) or when id changes
+    fetchReactions();
+  }, [id, user]);
 
   const fetchPost = async () => {
     try {
