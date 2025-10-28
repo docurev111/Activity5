@@ -98,16 +98,15 @@ const PostDetail = () => {
       if (userHasLiked) {
         // Unlike
         await reactionsAPI.delete(String(id));
-        setUserHasLiked(false);
-        setLikesCount(prev => Math.max(0, prev - 1));
         toast.success('Like removed');
       } else {
         // Like - postId must be string and type must be lowercase
         await reactionsAPI.create({ postId: String(id), type: 'like' });
-        setUserHasLiked(true);
-        setLikesCount(prev => prev + 1);
         toast.success('Post liked!');
       }
+      
+      // Always refetch reactions after like/unlike to ensure correct state
+      await fetchReactions();
     } catch (error) {
       console.error('Failed to update reaction:', error);
       console.error('Error details:', error.response?.data);
