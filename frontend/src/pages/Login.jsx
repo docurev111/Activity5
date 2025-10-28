@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 import './Auth.css';
 
 const Login = () => {
@@ -9,10 +10,12 @@ const Login = () => {
     password: '',
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    setError(''); // Clear error when user types
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -22,13 +25,22 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
-    const success = await login(formData.email, formData.password);
-    if (success) {
-      navigate('/');
+    try {
+      const success = await login(formData.email, formData.password);
+      if (success) {
+        navigate('/');
+      } else {
+        setError('Invalid email or password. Please try again.');
+      }
+    } catch (err) {
+      console.error('Login error:', err);
+      setError('An error occurred during login. Please try again.');
+      toast.error('Login failed. Please check your credentials.');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -37,6 +49,20 @@ const Login = () => {
         <div className="auth-card">
           <h1 className="auth-title">Welcome Back</h1>
           <p className="auth-subtitle">Login to your account</p>
+
+          {error && (
+            <div className="error-message" style={{
+              backgroundColor: '#ff4444',
+              color: 'white',
+              padding: '12px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              textAlign: 'center',
+              fontWeight: '500'
+            }}>
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { toast } from 'react-toastify';
 import './Auth.css';
 
 const Register = () => {
@@ -10,10 +11,12 @@ const Register = () => {
     username: '',
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   const { register } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    setError(''); // Clear error when user types
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -23,13 +26,22 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
-    const success = await register(formData);
-    if (success) {
-      navigate('/');
+    try {
+      const success = await register(formData);
+      if (success) {
+        navigate('/');
+      } else {
+        setError('Registration failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Registration error:', err);
+      setError('An error occurred during registration. Please try again.');
+      toast.error('Registration failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -38,6 +50,20 @@ const Register = () => {
         <div className="auth-card">
           <h1 className="auth-title">Join Us</h1>
           <p className="auth-subtitle">Create your account</p>
+
+          {error && (
+            <div className="error-message" style={{
+              backgroundColor: '#ff4444',
+              color: 'white',
+              padding: '12px',
+              borderRadius: '8px',
+              marginBottom: '20px',
+              textAlign: 'center',
+              fontWeight: '500'
+            }}>
+              {error}
+            </div>
+          )}
 
           <form onSubmit={handleSubmit} className="auth-form">
             <div className="form-group">
