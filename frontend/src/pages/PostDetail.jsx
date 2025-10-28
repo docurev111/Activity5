@@ -69,9 +69,9 @@ const PostDetail = () => {
       const total = response.data.total || 0;
       setLikesCount(total);
       
-      // Check if current user has liked
-      if (user && response.data.byType && response.data.byType.LIKE) {
-        const hasLiked = response.data.byType.LIKE.some(u => u.id === user.id);
+      // Check if current user has liked (backend returns lowercase 'like')
+      if (user && response.data.byType && response.data.byType.like) {
+        const hasLiked = response.data.byType.like.some(u => u.id === user.id);
         setUserHasLiked(hasLiked);
       } else {
         setUserHasLiked(false);
@@ -97,13 +97,13 @@ const PostDetail = () => {
     try {
       if (userHasLiked) {
         // Unlike
-        await reactionsAPI.delete(id);
+        await reactionsAPI.delete(String(id));
         setUserHasLiked(false);
         setLikesCount(prev => Math.max(0, prev - 1));
         toast.success('Like removed');
       } else {
-        // Like
-        await reactionsAPI.create({ postId: id, type: 'LIKE' });
+        // Like - postId must be string and type must be lowercase
+        await reactionsAPI.create({ postId: String(id), type: 'like' });
         setUserHasLiked(true);
         setLikesCount(prev => prev + 1);
         toast.success('Post liked!');
