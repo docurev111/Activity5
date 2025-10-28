@@ -68,7 +68,8 @@ export class CommentsService {
   async update(id: string, updateCommentDto: UpdateCommentDto, user: User): Promise<Comment> {
     const comment = await this.findOne(id);
 
-    if (comment.userId !== user.id) {
+    // Allow user to update their own comment or admin to update any comment
+    if (comment.userId !== user.id && user.role !== 'admin') {
       throw new ForbiddenException('You can only update your own comments');
     }
 
@@ -79,7 +80,8 @@ export class CommentsService {
   async remove(id: string, user: User): Promise<void> {
     const comment = await this.findOne(id);
 
-    if (comment.userId !== user.id) {
+    // Allow user to delete their own comment or admin to delete any comment
+    if (comment.userId !== user.id && user.role !== 'admin') {
       throw new ForbiddenException('You can only delete your own comments');
     }
 
